@@ -1,0 +1,22 @@
+
+{
+  "manifest_version": 3,
+  "name": "OmniAuth Secure 2FA",
+  "version": "1.1.0",
+  "description": "Secure TOTP Authenticator with AI assistance and PIN protection.",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*.google.com/"
+  ]
+}

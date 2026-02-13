@@ -1,0 +1,7 @@
+{
+  "name": "OmniAuth Web - Secure TOTP Authenticator",
+  "description": "A high-security, web-based alternative to mobile authenticator apps. Manage your 2FA tokens with a clean interface, AI-powered setup assistance, and encrypted local storage.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
