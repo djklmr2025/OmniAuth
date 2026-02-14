@@ -1,37 +1,136 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OmniAuth Web</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OmniAuth – Authenticator Offline</title>
+  <meta name="description" content="Extensión Chrome/Edge: TOTP offline + QR local + bóveda cifrada + backup .authbackup." />
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1b33;
+      --text:#dbe7ff;
+      --muted:#9bb0d6;
+      --btn:#1e8e3e;
+      --btn2:#2b6cb0;
+      --btn3:#374151;
+      --border:rgba(255,255,255,.10);
     }
-    .otp-gradient {
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 50% -10%, #1a2a52 0%, var(--bg) 55%);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
     }
+    .container{
+      width:min(920px, 100%);
+      background:rgba(15,27,51,.72);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:28px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
+    h1{margin:0 0 8px; font-size:30px}
+    .sub{margin:0 0 18px; color:var(--muted); line-height:1.45}
+    .badges{
+      display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 22px;
+    }
+    .badge{
+      border:1px solid var(--border);
+      padding:6px 10px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+      background:rgba(0,0,0,.18);
+    }
+    .buttons{display:flex; gap:12px; flex-wrap:wrap; margin:14px 0 14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:12px;
+      text-decoration:none;
+      color:white;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.08);
+      min-width: 220px;
+    }
+    .btn.primary{background:var(--btn)}
+    .btn.secondary{background:var(--btn2)}
+    .btn.ghost{background:var(--btn3)}
+    .note{
+      margin:14px 0 0;
+      padding:14px;
+      border:1px dashed var(--border);
+      border-radius:14px;
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14px;
+    }
+    code{
+      background:rgba(0,0,0,.28);
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid var(--border);
+      color:#eaf1ff;
+    }
+    .links{display:flex; gap:14px; flex-wrap:wrap; margin-top:18px}
+    .links a{color:#bcd0ff; text-decoration:none}
+    footer{margin-top:22px; color:rgba(219,231,255,.55); font-size:13px}
   </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
-    "otpauth": "https://esm.sh/otpauth@^9.5.0"
-  }
-}
-</script>
 </head>
 <body>
-  <div id="root"></div>
+  <div class="container">
+    <h1>🔐 OmniAuth – Authenticator Offline</h1>
+    <p class="sub">
+      Extensión para Chrome/Edge con <strong>TOTP offline</strong>, <strong>QR local</strong>, <strong>bóveda cifrada</strong> y <strong>backup seguro</strong> (.authbackup).
+      No usa Gemini, no manda secretos a internet.
+    </p>
+
+    <div class="badges">
+      <span class="badge">✅ TOTP (RFC 6238)</span>
+      <span class="badge">✅ QR local (sin nube)</span>
+      <span class="badge">🔒 Bóveda AES-GCM + PBKDF2</span>
+      <span class="badge">📦 Backup/Restore</span>
+      <span class="badge">🧩 Chrome / Edge (MV3)</span>
+    </div>
+
+    <div class="buttons">
+      <!-- Descarga directa: agrega ?raw=1 -->
+      <a class="btn primary" href="https://github.com/djklmr2025/OmniAuth/blob/main/OmniAuth-extension-final.zip?raw=1" download>
+        📥 Descargar ZIP (Extensión)
+      </a>
+      <a class="btn secondary" href="https://github.com/djklmr2025/OmniAuth" target="_blank" rel="noopener">
+        🧠 Ver repositorio
+      </a>
+      <a class="btn ghost" href="https://github.com/djklmr2025/OmniAuth/blob/main/README.md" target="_blank" rel="noopener">
+        📘 README
+      </a>
+    </div>
+
+    <div class="note">
+      <strong>Instalación (ZIP):</strong><br>
+      1) Descomprime el ZIP<br>
+      2) Abre <code>chrome://extensions</code> o <code>edge://extensions</code><br>
+      3) Activa <strong>Modo desarrollador</strong><br>
+      4) Click en <strong>Cargar descomprimida</strong><br>
+      5) Selecciona la carpeta descomprimida (la que contiene <code>manifest.json</code>)<br><br>
+      <strong>Consejo:</strong> crea tu bóveda (contraseña), agrega cuentas y exporta tu <code>.authbackup</code> a 2 lugares.
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/djklmr2025/OmniAuth/blob/main/LICENSE" target="_blank" rel="noopener">📄 Licencia</a>
+      <a href="https://github.com/djklmr2025/OmniAuth/issues" target="_blank" rel="noopener">🐞 Issues</a>
+    </div>
+
+    <footer>© 2026 OmniAuth • Publicado mediante GitHub Pages</footer>
+  </div>
 </body>
 </html>
